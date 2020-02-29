@@ -113,7 +113,7 @@ if($loginRes)
                 // Archive VideoId
                 $archiveText = "{$videoInfo->getId()} -> {$videoInfo->getTitle()} -> {$videoInfo->getFileName()}";
                 $archiveText .= "-> Start at " . date('Y-m-d H:i:s') . "\r\n";
-                file_put_contents(DOWNLOADED_FILE, $archiveText);
+                file_put_contents(DOWNLOADED_FILE, $archiveText, FILE_APPEND);
 
                 mySleep(10);
             }
