@@ -29,7 +29,8 @@ $initFile = $argv[1];
 $init = getIni($initFile);
 
 define('FILE_NAME'          , $init['videos_id_file_path']);
-define('SESSION_FILE'        , 'session');
+define('SESSION_FILE'       , 'session');
+define('DOWNLOADED_FILE'    , 'Downloaded_List.txt');
 define('NAMAVA_USERNAME'    , $init['username']);
 define('NAMAVA_PASSWORD'    , $init['password']);
 //////////////////////////////////////////////////
@@ -108,6 +109,11 @@ if($loginRes)
                 file_put_contents(SESSION_FILE, serialize($videoInfo));
 
                 write_array($files_url);
+
+                // Archive VideoId
+                $archiveText = "{$videoInfo->getId()} -> {$videoInfo->getTitle()} -> {$videoInfo->getFileName()}";
+                $archiveText .= "-> Start at " . date('Y-m-d H:i:s') . "\r\n";
+                file_put_contents(DOWNLOADED_FILE, $archiveText);
 
                 mySleep(10);
             }
